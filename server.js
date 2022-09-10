@@ -35,11 +35,14 @@ app.get('/api/sales', async (req, res, next)=>{
     }
 })
 
+
+
+
 const init = () =>{
     try{
+        syncAndSeed();
         const port = process.env.PORT || 3000;
         app.listen(port, ()=> console.log(`listening on port ${port}`))
-        syncAndSeed();
     }
     catch(err){
         console.log(err)

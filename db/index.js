@@ -1,21 +1,36 @@
 const Sequelize = require('sequelize');
-const { STRING, BOOLEAN } = Sequelize;
+const { STRING, BOOLEAN, UUID, UUIDV4 } = Sequelize;
 
 const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_car_sales_db')
 
 const User = db.define('user',{
+    id:{
+        type: UUID,
+        defaultValue: UUIDV4,
+        primaryKey: true
+    },
     name: {
         type: STRING
     }
 })
 
 const Car = db.define('car', {
+    id:{
+        type: UUID,
+        defaultValue: UUIDV4,
+        primaryKey: true
+    },
     name: {
         type: STRING
     }
 })
 
 const Sale = db.define('sale', {
+    id:{
+        type: UUID,
+        defaultValue: UUIDV4,
+        primaryKey: true
+    },
     extendedWarenty:{
         type: BOOLEAN,
         defaultValue: true,
