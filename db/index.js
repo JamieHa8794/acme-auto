@@ -59,7 +59,10 @@ const syncAndSeed = async () =>{
 
         const sales = await Promise.all([
         Sale.create({userId: moe.id, carId: ford.id}),
-        Sale.create({userId: moe.id, carId: audi.id})
+        Sale.create({userId: moe.id, carId: audi.id}),
+        Sale.create({userId: lucy.id, carId: audi.id}),
+        Sale.create({userId: larry.id, carId: ford.id}),
+        Sale.create({userId: larry.id, carId: toyta.id})
         ])
         }
     catch(err){

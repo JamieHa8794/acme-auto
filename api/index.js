@@ -23,9 +23,16 @@ router.get('/cars', async (req, res, next)=>{
     }
 })
 
-router.get('/sales', async (req, res, next)=>{
+router.get('/users/:id/sales', async (req, res, next)=>{
     try{
-        const Sales = await Sale.findAll();
+        const Sales = await Sale.findAll({
+            where:{
+                userId: req.params.id
+            },
+            include:[
+                Car
+            ]
+        });
         res.send(Sales);
     }
     catch(err){

@@ -4,9 +4,22 @@ const router = require('./api/index');
 const express = require('express');
 const app = express();
 
+const path = require('path')
+
+app.use('/dist', express.static(path.join(__dirname, 'dist')))
+app.use('/public', express.static(path.join(__dirname, 'public')))
+
+
 app.use('/api', require('./api'))
 
-
+app.get('/', (req, res, next)=>{
+    try{
+        res.sendFile(path.join(__dirname,'index.html'))
+    }
+    catch(err){
+        next(err)
+    }
+})
 
 
 const init = () =>{
