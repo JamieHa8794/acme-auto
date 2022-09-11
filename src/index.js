@@ -25,15 +25,23 @@ const renderCars = (cars) =>{
     const html = cars.map(car =>{
         return(`
             <li>
-                <a href='#${car.id}'>
                     ${car.name}
-                </a>
             </li>
         `)
     }).join('');
     carList.innerHTML = html;
 }
 
+const renderSales = (sales) =>{
+    const html = sales.map(sale =>{
+        return(`
+            <li>
+                ${sale.car.name}
+            </li>
+        `)
+    }).join('');
+    saleList.innerHTML = html;
+}
 
 
 const init = async () =>{
@@ -50,5 +58,16 @@ const init = async () =>{
         console.log(err);
     }
 }
+
+window.addEventListener('hashchange', async ()=>{
+    const userId = window.location.hash.slice(1);
+    const url = `/api/users/${userId}/sales`;
+    const sales = (await axios(url)).data
+    console.log(sales)
+    renderSales(sales)
+})
+
+
+
 
 init();
