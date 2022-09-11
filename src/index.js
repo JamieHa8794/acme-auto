@@ -9,13 +9,25 @@ const saleList = document.querySelector('#sale-list')
 
 const renderUsers = (users) =>{
     const html = users.map(user =>{
-        return(`
-            <li>
+
+        if(user.id === window.location.hash.slice(1)){
+            return(`
+            <li class='selected'>
                 <a href='#${user.id}'>
                 ${user.name}
                 </a>
             </li>
-        `)
+            `)
+        }
+        else{
+            return(`
+                <li>
+                    <a href='#${user.id}'>
+                    ${user.name}
+                    </a>
+                </li>
+            `)
+        }
     }).join('')
     userList.innerHTML = html;
 }
@@ -52,6 +64,11 @@ const init = async () =>{
 
         renderUsers(users);
         renderCars(cars);
+        const userId = window.location.hash.slice(1);
+        const url = `/api/users/${userId}/sales`;
+        const sales = (await axios(url)).data
+        console.log(sales)
+        renderSales(sales)
 
     }
     catch(err){
@@ -65,6 +82,9 @@ window.addEventListener('hashchange', async ()=>{
     const sales = (await axios(url)).data
     console.log(sales)
     renderSales(sales)
+
+    const users = (await axios.get('/api/users')).data;
+    renderUsers(users)
 })
 
 

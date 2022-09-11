@@ -7,3 +7,6 @@ main{
     flex-direction: row;
     justify-content: space-around;
 }
+.selected{
+    background-color: red;
+}
