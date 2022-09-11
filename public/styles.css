@@ -2,3 +2,8 @@ body{
     background-color: lightcoral;
     font-family: fantasy;
 }
+main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
